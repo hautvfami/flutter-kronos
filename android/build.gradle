@@ -1,4 +1,4 @@
-group 'com.vingroup.retails.flutter_kronos'
+group 'com.stark.flutter_kronos'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -25,7 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -40,5 +40,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.lyft.kronos:kronos-android:0.0.1-alpha10"
+    implementation "com.lyft.kronos:kronos-android:0.0.1-alpha11"
 }

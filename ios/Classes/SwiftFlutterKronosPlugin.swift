@@ -11,13 +11,13 @@ public class SwiftFlutterKronosPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case "sync":
+    case "SYNC":
         Clock.sync()
         result(nil)
-    case "getCurrentTimeMs":
+    case "GET_CURRENT_TIME_MS":
         let now = Clock.now?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
         result(Int64(now*1000))
-    case "getCurrentNtpTimeMs":
+    case "GET_CURRENT_NTP_TIME_MS":
         guard let ntpTime = Clock.now else {
             result(nil)
             return

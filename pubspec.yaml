@@ -1,12 +1,12 @@
 name: flutter_kronos
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+description: Flutter Kronos plugin project.
+version: 0.0.2
+homepage: 'https://github.com/hautvfami/flutter-kronos'
 repository: 'https://github.com/hautvfami/flutter-kronos'
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=2.5.2"
 
 dependencies:
   flutter:
@@ -17,8 +17,9 @@ dev_dependencies:
     sdk: flutter
 flutter:
   plugin:
-    android:
-      package: com.vingroup.retails.flutter_kronos
-      pluginClass: FlutterKronosPlugin
-    ios:
-      pluginClass: FlutterKronosPlugin
+    platforms:
+      android:
+        package: com.stark.flutter_kronos
+        pluginClass: FlutterKronosPlugin
+      ios:
+        pluginClass: FlutterKronosPlugin
