@@ -1,5 +1,5 @@
 name: flutter_kronos
-description: Flutter Kronos plugin project.
+description: Kronos is an open source Network Time Protocol (NTP) synchronization library for providing a trusted clock.
 version: 0.0.2+1
 homepage: 'https://github.com/hautvfami/flutter-kronos'
 repository: 'https://github.com/hautvfami/flutter-kronos'
