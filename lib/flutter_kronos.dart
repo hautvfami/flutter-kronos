@@ -11,6 +11,14 @@ class FlutterKronos {
     return await _channel.invokeMethod("GET_CURRENT_TIME_MS");
   }
 
+  static Future<DateTime?> get getDateTime async {
+    final int? _ms = await _channel.invokeMethod("GET_CURRENT_TIME_MS");
+    if (_ms != null)
+      return DateTime.fromMillisecondsSinceEpoch(_ms);
+    else
+      return null;
+  }
+
   /// If the NTP server cannot be reached or Kronos has not yet been synced,
   /// getCurrentTimeMs() will return time from the fallback clock and trigger syncInBackground().
   /// If you'd rather control the fallback, you can use getCurrentNtpTimeMs(),
@@ -20,6 +28,14 @@ class FlutterKronos {
   /// which will be null if currentTime is coming from the device clock.
   static Future<int?> get getCurrentNtpTimeMs async {
     return await _channel.invokeMethod("GET_CURRENT_NTP_TIME_MS");
+  }
+
+  static Future<DateTime?> get getNtpDateTime async {
+    final int? _ms = await _channel.invokeMethod("GET_CURRENT_NTP_TIME_MS");
+    if (_ms != null)
+      return DateTime.fromMillisecondsSinceEpoch(_ms);
+    else
+      return null;
   }
 
   static void sync() {

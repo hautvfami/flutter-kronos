@@ -33,20 +33,22 @@ Add the following permission in your Android Manifest file:
 
 ### Sync clock using a pool of NTP servers
 
-Calling `Clock.sync` will fire a bunch of NTP requests to up to 5 of the
+Calling `FlutterKronos.sync` will fire a bunch of NTP requests to up to 5 of the
 servers on the given NTP pool. As soon as
-we get the first response, the given closure is called but the `Clock`
+we get the first response, the given closure is called but the `FlutterKronos`
 will keep trying to get a more accurate response.
 
 ```dart
-KronosClock.sync();
+FlutterKronos.sync();
 ```
 
 ### Get an NTP time
 
 ```dart
-KronosClock.getCurrentTimeMs(); //return time from the fallback clock if Kronos has not yet been synced
-KronosClock.getCurrentNtpTimeMs(); //return null if Kronos has not yet been synced
+int? FlutterKronos.getCurrentTimeMs(); //return time from the fallback clock if Kronos has not yet been synced
+int? FlutterKronos.getCurrentNtpTimeMs(); //return null if Kronos has not yet been synced
+DateTime? FlutterKronos.getDateTime(); //return null if Kronos has not yet been synced
+DateTime? FlutterKronos.getNtpDateTime(); //return null if Kronos has not yet been synced
 ```
 
 
