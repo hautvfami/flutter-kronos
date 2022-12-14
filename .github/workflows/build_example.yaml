@@ -1,0 +1,53 @@
+name: BUILD
+env:
+  FLUTTER_VERSION: "stable"
+  FLUTTER_SDK: "2.5.2"
+  BUILD_DIR: "./example"
+on:
+  push:
+    #    branches:
+    #      - master
+    tags:
+      - v*             # Push events to vX.X.X tag
+jobs:
+  build_apk:
+    name: APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # This steps installing flutter
+      - name: Installing Flutter
+        uses: britannio/action-install-flutter@v1.0
+        with:
+          version: ${{ env.FLUTTER_SDK }}
+      - name: Flutter doctor
+        run: flutter doctor
+
+      # This steps build app
+      - name: Installing dependencies
+        run: flutter pub get
+      - name: Build APK
+        run: cd ${{ env.BUILD_DIR }} ; flutter build apk -t ./lib/main.dart --release
+
+      # This step reads a file from repo and use it for body of the release
+      # This works on any self-hosted runner OS
+      - name: Read RELEASE.md and use it as a body of new release
+        id: read_release
+        shell: bash
+        run: |
+          r=$(cat ./RELEASE.md)                       # <--- Read RELEASE.md (Provide correct path as per your repo)
+          r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
+          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
+          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
+          echo "::set-output name=RELEASE_BODY::$r"         # <--- Set environment variable
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.BUILD_DIR }}/build/app/outputs/flutter-apk/app-release.apk
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+          body: |
+            ${{ steps.read_release.outputs.RELEASE_BODY }}

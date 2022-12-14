@@ -1,4 +1,4 @@
-package com.vingroup.retails.flutter_kronos
+package com.stark.flutter_kronos
 
 import androidx.annotation.NonNull
 import com.lyft.kronos.AndroidClockFactory
@@ -25,13 +25,13 @@ class FlutterKronosPlugin : MethodCallHandler, FlutterPlugin, ActivityAware {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
-            "sync" -> {
+            "SYNC" -> {
                 kronosClock?.syncInBackground()
             }
-            "getCurrentTimeMs" -> {
+            "GET_CURRENT_TIME_MS" -> {
                 result.success(kronosClock?.getCurrentTimeMs());
             }
-            "getCurrentNtpTimeMs" -> {
+            "GET_CURRENT_NTP_TIME_MS" -> {
                 result.success(kronosClock?.getCurrentNtpTimeMs());
             }
             else -> {
