@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
 extension TimeConvert on int? {
   String get stringify => this == null || this! <= 0
       ? ''
-      : '${DateTime.fromMillisecondsSinceEpoch(this!).toString()}';
+      : DateTime.fromMillisecondsSinceEpoch(this!).toString();
 }
 
 void main() {
